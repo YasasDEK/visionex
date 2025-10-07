@@ -1,0 +1,351 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "User inerview",
+      "status": "todo",
+      "category": "Research",
+      "assignees": [
+        {
+          "id": "u1",
+          "name": "User 1",
+          "avatar": "/avatars/avatar1.jpg"
+        }
+      ],
+      "attachments": 2,
+      "comments": 2,
+      "dueDate": "Tomorrow",
+      "priority": "low"
+    },
+    {
+      "id": "2",
+      "title": "Design System",
+      "status": "todo",
+      "category": "Design",
+      "assignees": [
+        {
+          "id": "u2",
+          "name": "User 2",
+          "avatar": "/avatars/avatar2.jpg"
+        },
+        {
+          "id": "u3",
+          "name": "User 3",
+          "avatar": "/avatars/avatar3.jpg"
+        }
+      ],
+      "attachments": 3,
+      "comments": 8,
+      "priority": "high",
+      "reports": 2
+    },
+    {
+      "id": "3",
+      "title": "Speech",
+      "status": "todo",
+      "category": "Other",
+      "assignees": [
+        {
+          "id": "u4",
+          "name": "User 4",
+          "avatar": "/avatars/avatar4.jpg"
+        },
+        {
+          "id": "u5",
+          "name": "User 5",
+          "avatar": "/avatars/avatar5.jpg"
+        },
+        {
+          "id": "u6",
+          "name": "User 6",
+          "avatar": "/avatars/avatar6.jpg"
+        }
+      ],
+      "attachments": 1,
+      "comments": 3,
+      "priority": "low",
+      "stream": true
+    },
+    {
+      "id": "4",
+      "title": "Wireframe",
+      "status": "todo",
+      "category": "Design",
+      "assignees": [
+        {
+          "id": "u7",
+          "name": "User 7",
+          "avatar": "/avatars/avatar7.jpg"
+        },
+        {
+          "id": "u8",
+          "name": "User 8",
+          "avatar": "/avatars/avatar8.jpg"
+        },
+        {
+          "id": "u9",
+          "name": "User 9",
+          "avatar": "/avatars/avatar9.jpg"
+        }
+      ],
+      "priority": "medium"
+    },
+    {
+      "id": "5",
+      "title": "UI Design",
+      "status": "inprogress",
+      "category": "Design",
+      "assignees": [
+        {
+          "id": "u10",
+          "name": "User 10",
+          "avatar": "/avatars/avatar10.jpg"
+        },
+        {
+          "id": "u11",
+          "name": "User 11",
+          "avatar": "/avatars/avatar11.jpg"
+        }
+      ],
+      "attachments": 2,
+      "comments": 2,
+      "dueDate": "Tomorrow",
+      "priority": "high"
+    },
+    {
+      "id": "6",
+      "title": "Check Clients Feedback",
+      "status": "inprogress",
+      "category": "Feedback",
+      "assignees": [
+        {
+          "id": "u12",
+          "name": "User 12",
+          "avatar": "/avatars/avatar12.jpg"
+        },
+        {
+          "id": "u13",
+          "name": "User 13",
+          "avatar": "/avatars/avatar13.jpg"
+        },
+        {
+          "id": "u14",
+          "name": "User 14",
+          "avatar": "/avatars/avatar14.jpg"
+        }
+      ],
+      "attachments": 8,
+      "dueDate": "22 April, 2022",
+      "priority": "medium",
+      "hasImage": true
+    },
+    {
+      "id": "7",
+      "title": "Copyright",
+      "status": "inprogress",
+      "category": "Presentation",
+      "assignees": [
+        {
+          "id": "u15",
+          "name": "User 15",
+          "avatar": "/avatars/avatar15.jpg"
+        }
+      ],
+      "attachments": 4,
+      "dueDate": "22 April, 2022",
+      "priority": "medium"
+    },
+    {
+      "id": "8",
+      "title": "Filter sorting",
+      "status": "inprogress",
+      "category": "UX Research",
+      "assignees": [
+        {
+          "id": "u16",
+          "name": "User 16",
+          "avatar": "/avatars/avatar16.jpg"
+        },
+        {
+          "id": "u17",
+          "name": "User 17",
+          "avatar": "/avatars/avatar17.jpg"
+        }
+      ],
+      "attachments": 4,
+      "dueDate": "22 April, 2022",
+      "priority": "low"
+    },
+    {
+      "id": "9",
+      "title": "Prototype",
+      "status": "approved",
+      "category": "Research",
+      "assignees": [
+        {
+          "id": "u18",
+          "name": "User 18",
+          "avatar": "/avatars/avatar18.jpg"
+        },
+        {
+          "id": "u19",
+          "name": "User 19",
+          "avatar": "/avatars/avatar19.jpg"
+        },
+        {
+          "id": "u20",
+          "name": "User 20",
+          "avatar": "/avatars/avatar20.jpg"
+        }
+      ],
+      "attachments": 35,
+      "comments": 243,
+      "priority": "high"
+    },
+    {
+      "id": "10",
+      "title": "Detail Page",
+      "status": "approved",
+      "category": "Design",
+      "assignees": [
+        {
+          "id": "u21",
+          "name": "User 21",
+          "avatar": "/avatars/avatar21.jpg"
+        },
+        {
+          "id": "u22",
+          "name": "User 22",
+          "avatar": "/avatars/avatar22.jpg"
+        },
+        {
+          "id": "u23",
+          "name": "User 23",
+          "avatar": "/avatars/avatar23.jpg"
+        }
+      ],
+      "attachments": 6,
+      "comments": 28,
+      "priority": "medium",
+      "hasImage": true
+    },
+    {
+      "id": "11",
+      "title": "Animation preloaders",
+      "status": "approved",
+      "category": "Research",
+      "assignees": [
+        {
+          "id": "u24",
+          "name": "User 24",
+          "avatar": "/avatars/avatar24.jpg"
+        }
+      ],
+      "attachments": 8,
+      "comments": 31,
+      "priority": "low"
+    },
+    {
+      "id": "12",
+      "title": "Sorting category",
+      "status": "approved",
+      "category": "UX Research",
+      "assignees": [
+        {
+          "id": "u25",
+          "name": "User 25",
+          "avatar": "/avatars/avatar25.jpg"
+        },
+        {
+          "id": "u26",
+          "name": "User 26",
+          "avatar": "/avatars/avatar26.jpg"
+        },
+        {
+          "id": "u27",
+          "name": "User 27",
+          "avatar": "/avatars/avatar27.jpg"
+        }
+      ],
+      "priority": "medium"
+    },
+    {
+      "id": "13",
+      "title": "Group Managment",
+      "status": "reject",
+      "category": "Other",
+      "assignees": [
+        {
+          "id": "u28",
+          "name": "User 28",
+          "avatar": "/avatars/avatar28.jpg"
+        }
+      ],
+      "comments": 328,
+      "priority": "high",
+      "groupCall": true
+    },
+    {
+      "id": "14",
+      "title": "Design System",
+      "status": "reject",
+      "category": "Design",
+      "assignees": [
+        {
+          "id": "u29",
+          "name": "User 29",
+          "avatar": "/avatars/avatar29.jpg"
+        }
+      ],
+      "attachments": 3,
+      "comments": 8,
+      "priority": "high",
+      "reports": 2
+    },
+    {
+      "id": "15",
+      "title": "Slider controls",
+      "status": "reject",
+      "category": "Interface",
+      "assignees": [
+        {
+          "id": "u30",
+          "name": "User 30",
+          "avatar": "/avatars/avatar30.jpg"
+        },
+        {
+          "id": "u31",
+          "name": "User 31",
+          "avatar": "/avatars/avatar31.jpg"
+        }
+      ],
+      "attachments": 8,
+      "comments": 31,
+      "priority": "medium"
+    },
+    {
+      "id": "16",
+      "title": "Slider controls",
+      "status": "reject",
+      "category": "Design",
+      "assignees": [
+        {
+          "id": "u32",
+          "name": "User 32",
+          "avatar": "/avatars/avatar32.jpg"
+        },
+        {
+          "id": "u33",
+          "name": "User 33",
+          "avatar": "/avatars/avatar33.jpg"
+        },
+        {
+          "id": "u34",
+          "name": "User 34",
+          "avatar": "/avatars/avatar34.jpg"
+        }
+      ],
+      "priority": "low"
+    }
+  ]
+}
