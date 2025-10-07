@@ -21,13 +21,8 @@ export const useTaskStore = create<TaskStore>()(
       filteredTasks: [],
 
       initializeTasks: () => {
-        const storedTasks = get().tasks;
-        // Only initialize from JSON if no tasks in store
-        if (storedTasks.length === 0) {
-          set({ tasks: tasksData.tasks as Task[], filteredTasks: tasksData.tasks as Task[] });
-        } else {
-          set({ filteredTasks: storedTasks });
-        }
+        // Always reload from JSON to get latest data (you can change this back later)
+        set({ tasks: tasksData.tasks as Task[], filteredTasks: tasksData.tasks as Task[] });
       },
 
       moveTask: (taskId: string, newStatus: TaskStatus) => {

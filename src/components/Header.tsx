@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { Search, Bell, Settings, Plus, Layers } from 'lucide-react';
 import { useTaskStore } from '@/store/taskStore';
 
@@ -57,8 +58,14 @@ const Header = () => {
 
             {/* User Avatar */}
             <button className="ml-1 hover:opacity-80 transition-opacity">
-              <div className="w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center">
-                <span className="text-white text-sm font-semibold">U</span>
+              <div className="w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center overflow-hidden P-2">
+                <Image
+                  src="/images/Vector.png"
+                  alt="User"
+                  width={16}
+                  height={16}
+                  className="object-contain"
+                />
               </div>
             </button>
           </div>

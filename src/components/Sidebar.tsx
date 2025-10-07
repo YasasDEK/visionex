@@ -1,16 +1,18 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 import {
   LayoutDashboard,
   Layers,
   ChevronRight,
-  MessageSquare,
+  ChevronDown,
   Calendar,
   Users,
-  HelpCircle,
   LogOut,
-} from 'lucide-react';
+  ChevronUp,
+  Info,
+  MessageCircleMore,
+} from "lucide-react";
 
 const Sidebar = () => {
   const [isBoardsExpanded, setIsBoardsExpanded] = React.useState(true);
@@ -39,7 +41,7 @@ const Sidebar = () => {
             <p className="text-xs text-gray-500">Workspace</p>
             <p className="text-sm font-medium text-gray-900">Root folder</p>
           </div>
-          <ChevronRight className="w-4 h-4 text-gray-400" />
+          <ChevronDown className="w-4 h-4 text-gray-400" />
         </div>
       </div>
 
@@ -64,9 +66,9 @@ const Sidebar = () => {
           >
             <Layers className="w-5 h-5" />
             <span className="text-sm font-medium flex-1 text-left">Boards</span>
-            <ChevronRight
+            <ChevronUp
               className={`w-4 h-4 transition-transform ${
-                isBoardsExpanded ? 'rotate-90' : ''
+                isBoardsExpanded ? "rotate-180" : ""
               }`}
             />
           </button>
@@ -111,10 +113,10 @@ const Sidebar = () => {
             href="#"
             className="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors relative"
           >
-            <MessageSquare className="w-5 h-5" />
+            <MessageCircleMore className="w-5 h-5" />
             <span className="text-sm font-medium">Messages</span>
             <span className="ml-auto w-5 h-5 bg-orange-500 text-white text-xs rounded-full flex items-center justify-center">
-              8
+              3
             </span>
           </a>
         </div>
@@ -148,14 +150,14 @@ const Sidebar = () => {
           href="#"
           className="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors mb-2"
         >
-          <HelpCircle className="w-5 h-5" />
+          <Info className="w-5 h-5" />
           <span className="text-sm font-medium">Support</span>
         </a>
         <a
           href="#"
           className="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
         >
-          <LogOut className="w-5 h-5" />
+          <LogOut className="w-5 h-5 rotate-180" />
           <span className="text-sm font-medium">Logout</span>
         </a>
       </div>

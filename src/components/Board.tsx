@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
+import Image from "next/image";
 import { useTaskStore } from "@/store/taskStore";
 import Swimlane from "./Swimlane";
 import {
@@ -14,7 +15,7 @@ import {
 } from "@dnd-kit/core";
 import { TaskStatus } from "@/types/task";
 import TaskCard from "./TaskCard";
-import { Edit } from "lucide-react";
+import { Pencil } from "lucide-react";
 
 const Board = () => {
   const { initializeTasks, getTasksByStatus, moveTask, filteredTasks } =
@@ -93,30 +94,36 @@ const Board = () => {
             <div className="flex items-center gap-3 mb-4">
               {/* Assigned Team */}
               <div className="flex items-center gap-2">
-                <span className="text-xs text-gray-600 hidden sm:inline">
+                <span className="text-xs text-gray-400 hidden sm:inline">
                   assigned
                 </span>
                 <div className="flex -space-x-1.5">
                   {[1, 2, 3].map((i) => (
                     <div
                       key={i}
-                      className="w-7 h-7 rounded-full bg-gray-300 border-2 border-white flex items-center justify-center text-[10px] font-medium text-gray-700"
+                      className="w-7 h-7 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 border-2 border-white flex items-center justify-center overflow-hidden p-2"
                     >
-                      U{i}
+                      <Image
+                        src="/images/Vector.png"
+                        alt={`User ${i}`}
+                        width={12}
+                        height={12}
+                        className="object-contain"
+                      />
                     </div>
                   ))}
                   <div className="w-7 h-7 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center text-[10px] font-medium text-gray-600">
-                    +9
+                    +2
                   </div>
                 </div>
               </div>
 
               {/* Manage Button */}
-              <button className="flex items-center gap-1.5 px-3 py-1.5 text-gray-600 hover:bg-gray-50 rounded-4xl transition-colors border border-gray-200">
+              <button className="flex items-center gap-1.5 px-3 py-1.5 text-gray-400 hover:bg-gray-50 rounded-4xl transition-colors border border-gray-200">
                 <span className="text-xs font-medium hidden sm:inline">
                   Manage
                 </span>
-                <Edit className="w-3 h-3" />
+                <Pencil className="w-3 h-3" />
               </button>
             </div>
           </div>

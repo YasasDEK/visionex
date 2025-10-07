@@ -1,17 +1,18 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Task } from '@/types/task';
+import React from "react";
+import Image from "next/image";
+import { Task } from "@/types/task";
 import {
-  Paperclip,
-  MessageSquare,
   Calendar,
-  Radio,
   AlertCircle,
-  Video,
-} from 'lucide-react';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
+  Zap,
+  Link2,
+  Bell,
+  MessageCircleMore,
+} from "lucide-react";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 interface TaskCardProps {
   task: Task;
@@ -35,40 +36,60 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
 
   // Get category color - matching the exact design
   const getCategoryColor = (category: string) => {
-    const colors: { [key: string]: string } = {
-      Research: 'bg-emerald-50 text-emerald-600',
-      Design: 'bg-rose-50 text-rose-600',
-      Other: 'bg-slate-50 text-slate-600',
-      Feedback: 'bg-blue-50 text-blue-600',
-      Presentation: 'bg-orange-50 text-orange-600',
-      'UX Research': 'bg-amber-50 text-amber-600',
-      Interface: 'bg-indigo-50 text-indigo-600',
+    const colors: {
+      [key: string]: { bg: string; icon: string; text: string };
+    } = {
+      Research: {
+        bg: "bg-emerald-500",
+        icon: "bg-emerald-500",
+        text: "text-gray-400",
+      },
+      Design: { bg: "bg-rose-500", icon: "bg-rose-500", text: "text-gray-400" },
+      Other: {
+        bg: "bg-slate-500",
+        icon: "bg-slate-500",
+        text: "text-gray-400",
+      },
+      Feedback: {
+        bg: "bg-blue-500",
+        icon: "bg-blue-500",
+        text: "text-gray-400",
+      },
+      Presentation: {
+        bg: "bg-orange-500",
+        icon: "bg-orange-500",
+        text: "text-gray-400",
+      },
+      "UX Research": {
+        bg: "bg-amber-500",
+        icon: "bg-amber-500",
+        text: "text-gray-400",
+      },
+      Interface: {
+        bg: "bg-indigo-500",
+        icon: "bg-indigo-500",
+        text: "text-gray-400",
+      },
     };
-    return colors[category] || 'bg-gray-50 text-gray-600';
+    return (
+      colors[category] || {
+        bg: "bg-gray-500",
+        icon: "bg-gray-500",
+        text: "text-gray-400",
+      }
+    );
   };
 
-  // Get priority icon
-  const getPriorityIcon = () => {
-    if (task.priority === 'low') {
-      return (
-        <div className="flex items-center gap-1 text-gray-400">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="w-4 h-4">
-            <path d="M8 13L4 9M8 13L12 9M8 13V3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          <span className="text-xs">Low</span>
-        </div>
-      );
-    } else if (task.priority === 'medium') {
-      return (
-        <div className="flex items-center gap-1 text-gray-500">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="w-4 h-4">
-            <path d="M3 8H13M3 12H13M3 4H13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-          </svg>
-          <span className="text-xs">Medium</span>
-        </div>
-      );
-    }
-    return null;
+  // Get priority badge with icon
+  const getPriorityBadge = () => {
+    return (
+      <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 rounded-md">
+        <Zap className="w-4 h-4 text-gray-300 fill-gray-100" />
+        <span className="text-xs font-medium text-gray-400 capitalize">
+          {task.priority}
+        </span>
+      </div>
+    );
   };
 
   return (
@@ -79,94 +100,115 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
       {...listeners}
       className="bg-white rounded-xl p-3 shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-200 transition-all cursor-grab active:cursor-grabbing mb-2.5"
     >
-      {/* Category Badge and Reports */}
+      {/* Category Badge */}
       <div className="flex items-start justify-between mb-2">
-        <span
-          className={`px-2 py-0.5 rounded text-[11px] font-medium ${getCategoryColor(
-            task.category
-          )}`}
-        >
-          {task.category}
-        </span>
-        {task.reports && (
-          <div className="flex items-center gap-1 text-red-500 text-[11px] font-medium">
-            <AlertCircle className="w-3.5 h-3.5" />
-            {task.reports} Reports
-          </div>
-        )}
+        <div className="flex items-center gap-2">
+          <div
+            className={`w-2.5 h-2.5 rounded ${
+              getCategoryColor(task.category).icon
+            }`}
+          ></div>
+          <span
+            className={`text-[13px] font-normal ${
+              getCategoryColor(task.category).text
+            }`}
+          >
+            {task.category}
+          </span>
+        </div>
       </div>
 
       {/* Title */}
-      <h3 className="text-gray-900 font-semibold text-sm mb-2.5 leading-snug">{task.title}</h3>
+      <h3 className="text-gray-900 font-semibold text-sm mb-2.5 leading-snug">
+        {task.title}
+      </h3>
 
       {/* Assignees and Priority */}
-      <div className="flex items-center justify-between mb-2.5">
-        <div className="flex items-center">
-          <div className="flex -space-x-2">
-            {task.assignees.slice(0, 2).map((assignee) => (
-              <div
-                key={assignee.id}
-                className="w-6 h-6 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 border-2 border-white flex items-center justify-center text-[10px] font-semibold text-white"
-                title={assignee.name}
-              >
-                {assignee.name.charAt(0)}
-              </div>
-            ))}
-          </div>
-          {task.assignees.length > 2 && (
-            <span className="ml-1.5 text-[11px] text-gray-400 font-medium">
-              +{task.assignees.length - 2}
-            </span>
+      <div className="flex items-center gap-2 mb-8">
+        <div className="flex -space-x-2">
+          {task.assignees.slice(0, 3).map((assignee) => (
+            <div
+              key={assignee.id}
+              className="w-6 h-6 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 border-2 border-white flex items-center justify-center overflow-hidden P-2"
+              title={assignee.name}
+            >
+              <Image
+                src="/images/Vector.png"
+                alt={assignee.name}
+                width={10}
+                height={10}
+                className="object-contain"
+              />
+            </div>
+          ))}
+          {task.assignees.length > 3 && (
+            <div className="w-6 h-6 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center">
+              <span className="text-[10px] text-gray-600 font-medium">
+                +{task.assignees.length - 3}
+              </span>
+            </div>
           )}
         </div>
-        
-        {/* Priority indicator */}
-        {getPriorityIcon()}
+
+        {/* Priority badge on the right */}
+        {getPriorityBadge()}
       </div>
 
-      {/* Image Placeholder (if hasImage) */}
+      {/* Image Placeholder */}
       {task.hasImage && (
-        <div className="bg-gray-50 rounded-lg h-28 mb-2.5 flex items-center justify-center border border-gray-100">
-          <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm">
-            <div className="w-6 h-6 bg-gray-200 rounded"></div>
-          </div>
+        <div className="bg-gray-900 rounded-lg h-28 mb-2.5 flex items-center justify-center border border-gray-100">
+          <Image
+            src="/images/Vector.png"
+            alt="User"
+            width={16}
+            height={16}
+            className="object-contain"
+          />
         </div>
       )}
 
       {/* Footer */}
-      <div className="flex items-center justify-between pt-2 border-t border-gray-100">
-        <div className="flex items-center gap-3 text-gray-400">
+      <div className="flex items-center pt-2 border-t border-gray-100 gap-4">
+        <div className="flex items-center gap-4 text-gray-400">
           {task.attachments !== undefined && (
             <div className="flex items-center gap-1">
-              <Paperclip className="w-3.5 h-3.5" />
+              <Link2 className="w-3.5 h-3.5 rotate-135" />
               <span className="text-xs font-medium">{task.attachments}</span>
             </div>
           )}
           {task.comments !== undefined && (
             <div className="flex items-center gap-1">
-              <MessageSquare className="w-3.5 h-3.5" />
+              <MessageCircleMore className="w-3.5 h-3.5" />
               <span className="text-xs font-medium">{task.comments}</span>
             </div>
           )}
         </div>
 
-        <div className="flex items-center gap-2">
-          {task.stream && (
-            <div className="flex items-center gap-1 text-blue-500">
-              <Radio className="w-3.5 h-3.5" />
+        {/* Only show ONE of these indicators - priority order: reports > stream > groupCall > dueDate */}
+        <div className="flex items-center">
+          {task.reports ? (
+            <div className="flex items-center gap-1 text-red-500 text-[11px] font-medium">
+              <AlertCircle className="w-3.5 h-3.5" />
+              <span>{task.reports} Reports</span>
             </div>
-          )}
-          {task.groupCall && (
+          ) : task.stream ? (
             <div className="flex items-center gap-1 text-blue-500">
-              <Video className="w-3.5 h-3.5" />
+              <Bell className="w-3.5 h-3.5" />{" "}
+              <span className="text-[11px] font-medium">Stream</span>
             </div>
-          )}
-          {task.dueDate && (
+          ) : task.groupCall ? (
+            <div className="flex items-center gap-1 text-blue-500">
+              <Bell className="w-3.5 h-3.5" />
+              <span className="text-[11px] font-medium">Group Call</span>
+            </div>
+          ) : task.dueDate ? (
             <div className="flex items-center gap-1 text-gray-500">
               <Calendar className="w-3.5 h-3.5" />
-              <span className="text-[11px] font-medium">Due: {task.dueDate}</span>
+              <span className="text-[11px] font-medium">
+                Due: {task.dueDate}
+              </span>
             </div>
-          )}
+          ) : null}
         </div>
       </div>
     </div>
