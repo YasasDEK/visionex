@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
 import { Task } from "@/types/task";
 import {
@@ -98,7 +97,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
       style={style}
       {...attributes}
       {...listeners}
-      className="bg-white rounded-xl p-3 shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-200 transition-all cursor-grab active:cursor-grabbing mb-2.5"
+      className="bg-white rounded-xl p-3 shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-200 transition-all cursor-grab active:cursor-grabbing mb-2.5 touch-none"
     >
       {/* Category Badge */}
       <div className="flex items-start justify-between mb-2">

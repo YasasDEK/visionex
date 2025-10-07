@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTaskStore } from "@/store/taskStore";
 import Swimlane from "./Swimlane";
@@ -20,12 +20,12 @@ import { Pencil } from "lucide-react";
 const Board = () => {
   const { initializeTasks, getTasksByStatus, moveTask, filteredTasks } =
     useTaskStore();
-  const [activeId, setActiveId] = React.useState<string | null>(null);
+  const [activeId, setActiveId] = useState<string | null>(null);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        distance: 8,
+        distance: 5,
       },
     })
   );
@@ -73,16 +73,16 @@ const Board = () => {
     : null;
 
   return (
-    <div className="h-full flex flex-col overflow-hidden">
+    <div className="h-full w-full flex flex-col">
       {/* Project Header */}
-      <div className="bg-white border-b border-gray-200 px-4 md:px-6 py-3 flex-shrink-0">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-          <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-4">
-              <h1 className="text-lg md:text-xl font-bold text-gray-900">
+      <div className="bg-white border-b border-gray-200 px-4 md:px-6 py-3 md:py-4 flex-shrink-0">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-8">
+          <div className="flex flex-col gap-2 md:gap-3 w-full">
+            <div className="flex items-center gap-2 md:gap-4 flex-wrap">
+              <h1 className="text-base md:text-lg lg:text-xl font-bold text-gray-900">
                 Sport Xi Project
               </h1>
-              <span className="px-2.5 py-0.5 bg-yellow-500 text-white text-[11px] font-medium rounded">
+              <span className="px-2 md:px-2.5 py-0.5 bg-yellow-500 text-white text-[10px] md:text-[11px] font-medium rounded whitespace-nowrap">
                 in progress
               </span>
             </div>
@@ -91,9 +91,9 @@ const Board = () => {
               <p className="text-gray-500 text-xs mt-0.5">event production</p>
             </div>
 
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4 flex-wrap">
               {/* Assigned Team */}
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 md:gap-2">
                 <span className="text-xs text-gray-400 hidden sm:inline">
                   assigned
                 </span>
@@ -101,7 +101,7 @@ const Board = () => {
                   {[1, 2, 3].map((i) => (
                     <div
                       key={i}
-                      className="w-7 h-7 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 border-2 border-white flex items-center justify-center overflow-hidden p-2"
+                      className="w-6 h-6 md:w-7 md:h-7 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 border-2 border-white flex items-center justify-center overflow-hidden p-1.5 md:p-2"
                     >
                       <Image
                         src="/images/Vector.png"
@@ -112,14 +112,14 @@ const Board = () => {
                       />
                     </div>
                   ))}
-                  <div className="w-7 h-7 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center text-[10px] font-medium text-gray-600">
+                  <div className="w-6 h-6 md:w-7 md:h-7 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center text-[9px] md:text-[10px] font-medium text-gray-600">
                     +2
                   </div>
                 </div>
               </div>
 
               {/* Manage Button */}
-              <button className="flex items-center gap-1.5 px-3 py-1.5 text-gray-400 hover:bg-gray-50 rounded-4xl transition-colors border border-gray-200">
+              <button className="flex items-center gap-1.5 px-2.5 md:px-3 py-1.5 text-gray-400 hover:bg-gray-50 rounded-4xl transition-colors border border-gray-200">
                 <span className="text-xs font-medium hidden sm:inline">
                   Manage
                 </span>
@@ -129,51 +129,49 @@ const Board = () => {
           </div>
         </div>
 
-        <div className="pt-3 pb-0 border-t border-gray-200">
-          <p className="text-[14px] text-gray-400">
+        <div className="pt-2 md:pt-3 pb-0 border-t border-gray-200">
+          <p className="text-xs md:text-[14px] text-gray-400">
             Last updated on 04 April, 2022
           </p>
         </div>
       </div>
 
       {/* Swimlanes */}
-      <div className="flex-1 overflow-hidden">
-        <div className="h-full">
-          <DndContext
-            sensors={sensors}
-            collisionDetection={closestCorners}
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
-            onDragCancel={handleDragCancel}
-          >
-            <div className="flex h-full overflow-x-auto hide-scrollbar">
-              <Swimlane
-                title="To Do"
-                status="todo"
-                tasks={getTasksByStatus("todo")}
-              />
-              <Swimlane
-                title="In Progress"
-                status="inprogress"
-                tasks={getTasksByStatus("inprogress")}
-              />
-              <Swimlane
-                title="Approved"
-                status="approved"
-                tasks={getTasksByStatus("approved")}
-              />
-              <Swimlane
-                title="Reject"
-                status="reject"
-                tasks={getTasksByStatus("reject")}
-              />
-            </div>
+      <div className="flex-1 min-h-0">
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCorners}
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
+          onDragCancel={handleDragCancel}
+        >
+          <div className="h-full flex overflow-x-auto overflow-y-hidden md:overflow-x-hidden hide-scrollbar">
+            <Swimlane
+              title="To Do"
+              status="todo"
+              tasks={getTasksByStatus("todo")}
+            />
+            <Swimlane
+              title="In Progress"
+              status="inprogress"
+              tasks={getTasksByStatus("inprogress")}
+            />
+            <Swimlane
+              title="Approved"
+              status="approved"
+              tasks={getTasksByStatus("approved")}
+            />
+            <Swimlane
+              title="Reject"
+              status="reject"
+              tasks={getTasksByStatus("reject")}
+            />
+          </div>
 
-            <DragOverlay>
-              {activeTask ? <TaskCard task={activeTask} /> : null}
-            </DragOverlay>
-          </DndContext>
-        </div>
+          <DragOverlay>
+            {activeTask ? <TaskCard task={activeTask} /> : null}
+          </DragOverlay>
+        </DndContext>
       </div>
     </div>
   );

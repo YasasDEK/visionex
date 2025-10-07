@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { useState } from "react";
 import {
   LayoutDashboard,
   Layers,
@@ -12,13 +12,42 @@ import {
   ChevronUp,
   Info,
   MessageCircleMore,
+  X,
 } from "lucide-react";
 
-const Sidebar = () => {
-  const [isBoardsExpanded, setIsBoardsExpanded] = React.useState(true);
+interface SidebarProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
+  const [isBoardsExpanded, setIsBoardsExpanded] = useState(true);
 
   return (
-    <div className="w-[220px] bg-white border-r border-gray-200 flex-col h-screen fixed left-0 top-0 z-10 hidden md:flex">
+    <>
+      {/* Overlay for mobile */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 md:hidden"
+          onClick={onClose}
+        />
+      )}
+
+      {/* Sidebar */}
+      <div className={`
+        w-[220px] bg-white border-r border-gray-200 flex-col h-screen fixed left-0 top-0 z-40
+        transition-transform duration-300 ease-in-out
+        ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+        md:translate-x-0 md:flex md:z-10
+      `}>
+        {/* Close button for mobile */}
+        <button
+          onClick={onClose}
+          className="md:hidden absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          aria-label="Close menu"
+        >
+          <X className="w-5 h-5 text-gray-600" />
+        </button>
       {/* Logo */}
       <div className="p-6">
         <div className="flex items-center gap-2">
@@ -162,6 +191,7 @@ const Sidebar = () => {
         </a>
       </div>
     </div>
+    </>
   );
 };
 
