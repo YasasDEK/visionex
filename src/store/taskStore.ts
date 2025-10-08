@@ -21,8 +21,15 @@ export const useTaskStore = create<TaskStore>()(
       filteredTasks: [],
 
       initializeTasks: () => {
-        // Always reload from JSON to get latest data (you can change this back later)
-        set({ tasks: tasksData.tasks as Task[], filteredTasks: tasksData.tasks as Task[] });
+        const currentTasks = get().tasks;
+        
+        // Only load from JSON if no tasks exist in storage (first time load)
+        if (currentTasks.length === 0) {
+          set({ tasks: tasksData.tasks as Task[], filteredTasks: tasksData.tasks as Task[] });
+        } else {
+          // Tasks already loaded from localStorage, just sync filteredTasks
+          set({ filteredTasks: currentTasks });
+        }
       },
 
       moveTask: (taskId: string, newStatus: TaskStatus) => {
