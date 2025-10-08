@@ -1,7 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
-import { Search, Bell, Settings, Plus, Layers, Menu } from 'lucide-react';
+import { Search, Bell, Settings, Plus, Layers, Menu, X } from 'lucide-react';
 import { useTaskStore } from '@/store/taskStore';
 
 interface HeaderProps {
@@ -10,6 +11,7 @@ interface HeaderProps {
 
 const Header = ({ onMenuClick }: HeaderProps) => {
   const { searchQuery, setSearchQuery } = useTaskStore();
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
 
   return (
     <header className="bg-white border-b border-gray-200 h-[72px] fixed top-0 right-0 left-0 z-20">
@@ -53,7 +55,7 @@ const Header = ({ onMenuClick }: HeaderProps) => {
                 placeholder="Search tasks ..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-11 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-[15px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder:text-gray-400"
+                className="w-full pl-11 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-[15px] text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder:text-gray-400"
               />
             </div>
           </div>
@@ -61,7 +63,10 @@ const Header = ({ onMenuClick }: HeaderProps) => {
           {/* Icons */}
           <div className="flex items-center gap-1 md:gap-2 flex-shrink-0">
             {/* Search Icon - Mobile Only */}
-            <button className="sm:hidden p-2.5 hover:bg-gray-50 rounded-lg transition-colors">
+            <button 
+              onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
+              className="sm:hidden p-2.5 hover:bg-gray-50 rounded-lg transition-colors"
+            >
               <Search className="w-5 h-5 text-gray-500" />
             </button>
 
@@ -91,6 +96,32 @@ const Header = ({ onMenuClick }: HeaderProps) => {
           </div>
         </div>
       </div>
+
+      {/* Mobile Search Overlay */}
+      {isMobileSearchOpen && (
+        <div className="sm:hidden absolute top-full left-0 right-0 bg-white border-b border-gray-200 p-4 shadow-lg z-30">
+          <div className="relative">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search tasks ..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              autoFocus
+              className="w-full pl-11 pr-12 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-[15px] text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder:text-gray-400"
+            />
+            <button
+              onClick={() => {
+                setSearchQuery('');
+                setIsMobileSearchOpen(false);
+              }}
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-100 rounded transition-colors"
+            >
+              <X className="w-4 h-4 text-gray-500" />
+            </button>
+          </div>
+        </div>
+      )}
     </header>
   );
 };
